@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="annuaireApp" lang="fr">
+    <head>
+        <title>Annuaire Clien REST</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+        <script type="text/javascript" src="controller/AnnuaireCtrl.js"></script>
+    </head>
+    <body ng-controller="AnnuaireCtrl">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Annuaire</h2>
+                <ul>
+                    <li ng-repeat="contact in annuaire | filter:filtreNom">
+                        <button ng-click="supprimerContact($index)" type="button" class="btn btn-danger" title="Supprimer Contact">X</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <span ng-click="setFormContact($index, contact)">{{contact.nom}} {{contact.prenom}} ({{contact.age}})</span>
+                    </li>
+                </ul>
+                
+                </div>
+                <div class="col-md-4">
+                    <form class="form-horizontal" role="form">
+                        <fieldset>
+                            <legend>Filtres</legend>
+                            <div class="input-group"><button ng-click="chargerToutAnnuaire()" type="button" class="btn btn-primary">Charger tout l'annuaire</button></div>
+                            <br />
+                            <div class="input-group">
+                                <input ng-model="filtreNom" type="text" class="form-control" placeholder="Un Nom, un prénom ou un age" />
+                                <span class="input-group-btn"><button ng-click="filtreNom='';" type="button" class="btn btn-danger">R.A.Z.</button></span>
+                            </div>
+                        </fieldset>
+                    </form><br />
+                    <form class="form-horizontal" role="form">
+                        <fieldset>
+                            <legend>Édition d'un contact</legend>
+                            <div class="form-group">
+                                <input ng-model="formData.nom" type="text" class="form-control" placeholder="Nom" />
+                            </div>
+                            <div class="form-group">
+                                <input ng-model="formData.prenom" type="text" class="form-control" placeholder="Prénom" />
+                            </div>
+                            <div class="form-group">
+                                <input ng-model="formData.age" type="number" class="form-control" placeholder="Age" />
+                            </div>
+                            <div class="form-group"><button ng-click="modifierContact()" type="button" class="btn btn-primary">Valider</button> &nbsp;&nbsp;
+                            <button ng-click="formData={};" type="button" class="btn btn-danger">R.A.Z.</button></div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </body>
+</html>
