@@ -2,13 +2,13 @@ var directoryApp = angular.module('directoryApp', []);
 
 directoryApp.controller('DirectoryCtrl', function($scope, $http, $window) {
     
-    // You can set the serveur ip in the url like this
+    // You can set the server ip in the url like this
     // http://localhost/path/index.html?ip=192.168.0.1
     var ip = QueryString()['ip'] ? QueryString()['ip'] : "localhost";
     var urlAll = "http://" + ip + ":8080/Directory/dirapi/all";
     var urlContact = "http://" + ip + ":8080/Directory/dirapi/id/";
 
-    // For Cross Domaine request
+    // For Cross Domain request
     $http.defaults.useXDomain = true;
 
     $scope.formData = {};
@@ -16,7 +16,7 @@ directoryApp.controller('DirectoryCtrl', function($scope, $http, $window) {
 
     $scope.loadDirectory = function() {
 
-        $scope.filtreName = "";  // reset de la recherche
+        $scope.filtreName = "";  // search reset 
 
         $http.get(urlAll)
         .success(function(data) {
@@ -26,7 +26,7 @@ directoryApp.controller('DirectoryCtrl', function($scope, $http, $window) {
         .error(function(data, status) {
             console.log(data, status);
         });
-    }
+    };
 
     /**
      * When a click is triggered on a contact from the directory list
@@ -39,7 +39,7 @@ directoryApp.controller('DirectoryCtrl', function($scope, $http, $window) {
         $scope.formData.lastName = contact.lastName;
         $scope.formData.firstName = contact.firstName;
         $scope.formData.age = contact.age;
-    }
+    };
 
     /**
      * Send a new contact or a modified to the server for proceed to a save
@@ -67,7 +67,7 @@ directoryApp.controller('DirectoryCtrl', function($scope, $http, $window) {
                 $scope.directory[$scope.formData.id] = angular.copy($scope.formData);
             }
         });
-    }
+    };
     
     $scope.removeContact = function(contact){
         
@@ -86,7 +86,7 @@ directoryApp.controller('DirectoryCtrl', function($scope, $http, $window) {
                 $scope.directory.splice(indexContactToKill, 1);
             }
         });
-    }
+    };
 
     /**
      * Find a contact in the directory and retrun his index
@@ -100,8 +100,8 @@ directoryApp.controller('DirectoryCtrl', function($scope, $http, $window) {
                 return index;
             }
         }
-    }
+    };
     
-    // Premier chargement de la liste
+    // Init directory
     $scope.loadDirectory();
 });

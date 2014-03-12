@@ -1,4 +1,4 @@
-package org.msi;
+package org.demo;
 
 import java.io.IOException;
 import java.util.ArrayList;
