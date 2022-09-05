@@ -1,6 +1,8 @@
 JaxRSAngularJSDemo
 =================
 
+**This demo is archived**
+
 Basic demo of REST client-server using Java JaxRS and AngularJS.
 Used in a course on REST Web Services for beginners.
 
